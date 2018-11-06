@@ -1,25 +1,22 @@
-import { LOGIN_URL } from './links'
+import { ALL_EVENTS_URL, CREATE_EVENT } from './links'
 
 class Adapter {
+  static getAllEvents() {
+    return ( fetch(ALL_EVENTS_URL).then(r => r.json()) )
+  }
 
-  static login() {
+  static createEvent(fetchBody) {
+
     const fetchParams = {
       method: "POST",
       headers: {
-        "Accept": 'application/json',
-        "Content-Type": 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify("")
+      body: JSON.stringify(fetchBody)
     }
 
-    return (
-      fetch(LOGIN_URL)
-        .then(r => {
-          debugger
-          r.json()}
-        )
-        .then(userData => userData)
-    )
+    return fetch(ALL_EVENTS_URL, fetchParams).then(r => r.json())
   }
 
 }

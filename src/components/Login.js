@@ -15,7 +15,7 @@ const Login = (props) => {
 
 function mapStateToProps(state) {
   return {
-    spotify_id: state.spotify_id
+    spotifyId: state.spotifyId
   }
 }
 

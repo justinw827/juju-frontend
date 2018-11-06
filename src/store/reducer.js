@@ -1,15 +1,22 @@
 import { SET_USER } from './types'
 
+// CHANGE SPOTIFY ID
 const defaultState = {
-  spotify_id: ""
+  spotifyId: "1230817692",
+  authenticatingUser: false,
+  partyId: 1
 }
 
 export default (state=defaultState, action) => {
-  const newState = {...state}
   switch (action.type) {
     case SET_USER:
-      newState.spotify_id = action.spotify_id
-      return newState
+      return { ...state, spotifyId: action.spotifyId }
+    case 'AUTHENTICATING_USER':
+      return { ...state, authenticatingUser: true }
+    case 'AUTHENTICATED_USER':
+      return { ...state, authenticatingUser: false }
+    case 'SET_PARTY':
+      return { ...state,  partyId: action.partyId}
     default:
       return state
   }
