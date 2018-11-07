@@ -6,19 +6,20 @@ import { Button } from 'semantic-ui-react';
 import { setUser } from '../store/actions/user'
 import Adapter from '../adapters/Adapter'
 import PartyCard from './PartyCard'
+import PartySearch from './PartySearch';
 
 class EventList extends Component {
   state = {
-    events: [],
+    parties: [],
     eventButton: false
   }
 
   componentDidMount() {
-    // Fetch all events frmo backend
+    // Fetch all parties frmo backend
     Adapter.getAllEvents()
-    .then(events => {
+    .then(parties => {
       this.setState({
-        events
+        parties
       })
     })
   }
@@ -36,14 +37,34 @@ class EventList extends Component {
     }
   }
 
-  // Helper method to render Event components for all events
+  // Helper method to render Event components for all parties
   renderEvents = () => {
-    if(this.state.events.length > 0) {
-      return this.state.events.map(party => {
-        return <PartyCard key={party.id} eventInfo={party}/>
+    if(this.state.parties.length > 0) {
+      return this.state.parties.map(party => {
+        return <PartyCard key={party.id} partyInfo={party}/>
       })
     }
     return <p>No Events</p>
+  }
+
+  handlePartySearch = (event, searchTerm) => {
+    const fetchParams = {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({search_term: searchTerm})
+    }
+
+    // Fetch parties from backend that contain searchTerm as a substring in name
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/search`, fetchParams)
+      .then(r => r.json())
+      .then(parties => {
+        this.setState({
+          parties
+        })
+      })
   }
 
   render() {
@@ -57,6 +78,7 @@ class EventList extends Component {
 
     return (
       <Fragment>
+        <PartySearch handlePartySearch={ this.handlePartySearch }/>
         <h1>All Events</h1>
         {this.eventRedirect()}
         <Button onClick={this.handleClick}>Start an Event</Button>

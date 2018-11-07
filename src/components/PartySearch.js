@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Input, Form } from 'semantic-ui-react'
 
-class Search extends Component {
+class PartySearch extends Component {
   state = {
     input: ""
   }
@@ -15,13 +15,13 @@ class Search extends Component {
 
   render() {
     return (
-      <Form id="login-form" onSubmit={(event) => this.props.handleSearch(event, this.state.input)}>
+      <Form id="party-search" onSubmit={(event) => this.props.handlePartySearch(event, this.state.input)}>
         <label>
           <Input style={{width: '45%', fontSize: '20pt'}}
             value={this.state.input}
             onChange={this.handleChange}
             size='large' icon='search'
-            placeholder='Find a Song...'
+            placeholder='Find a Party!'
           />
         </label>
       </Form>
@@ -29,4 +29,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default PartySearch;

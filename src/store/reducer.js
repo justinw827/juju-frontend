@@ -1,5 +1,3 @@
-import { SET_USER } from './types'
-
 // CHANGE SPOTIFY ID
 const defaultState = {
   spotifyId: "1230817692",
@@ -9,7 +7,7 @@ const defaultState = {
 
 export default (state=defaultState, action) => {
   switch (action.type) {
-    case SET_USER:
+    case 'SET_USER':
       return { ...state, spotifyId: action.spotifyId }
     case 'AUTHENTICATING_USER':
       return { ...state, authenticatingUser: true }

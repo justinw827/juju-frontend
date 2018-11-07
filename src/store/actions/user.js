@@ -1,9 +1,8 @@
-import { SET_USER } from '../types';
 import Adapter from '../../adapters/Adapter';
 
 export const setUser = (spotifyId) => {
   return {
-    type: SET_USER,
+    type: 'SET_USER',
     spotifyId: spotifyId
   }
 }

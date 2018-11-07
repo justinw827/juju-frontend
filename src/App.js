@@ -9,8 +9,7 @@ import EventForm from './components/EventForm';
 import Party from './components/Party';
 import Search from './components/Search';
 import SongList from './components/SongList';
-
-import result from './searchSample'
+import NavBar from './components/NavBar';
 
 class App extends Component {
 
@@ -21,22 +20,25 @@ class App extends Component {
 
   handleSearch = (event, searchTerm) => {
     event.preventDefault()
-    const fetchParams = {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({search_term: searchTerm})
-    }
+    if (searchTerm !== "") {
+      const fetchParams = {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({search_term: searchTerm})
+      }
 
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/search`, fetchParams)
-      .then(r => r.json())
-      .then(songs => {
-        this.setState({
-          songs: songs.tracks.items,
-          search: true})
-      })
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/search`, fetchParams)
+        .then(r => r.json())
+        .then(songs => {
+          this.setState({
+            songs: songs.tracks.items,
+            search: true
+          })
+        })
+      }
   }
 
   redirectResults = () => {
@@ -46,10 +48,16 @@ class App extends Component {
   }
 
   render() {
+    const location = this.props.location.pathname
     return (
       <div className="App">
         {this.redirectResults()}
-        <Search handleSearch={ this.handleSearch }/>
+        <NavBar />
+        { location !== "/events" ?
+          <Search handleSearch={ this.handleSearch }/>
+          :
+          null
+        }
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/login" />} />
           <Route exact path="/login" component={Login} />
