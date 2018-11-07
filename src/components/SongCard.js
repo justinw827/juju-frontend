@@ -26,7 +26,7 @@ class SongCard extends Component {
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/events/${this.props.partyId}`, fetchParams)
       .then(r => r.json())
       .then(playlist => {
-        debugger
+        console.log(playlist);
       })
   }
 

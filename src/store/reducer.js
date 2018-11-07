@@ -1,6 +1,6 @@
 // CHANGE SPOTIFY ID
 const defaultState = {
-  spotifyId: "1230817692",
+  spotifyId: "",
   authenticatingUser: false,
   partyId: 1
 }
