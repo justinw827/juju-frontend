@@ -27,7 +27,10 @@ class App extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({search_term: searchTerm})
+        body: JSON.stringify({
+          search_term: searchTerm,
+          spotify_id: this.props.spotifyId
+        })
       }
 
       fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/search`, fetchParams)
@@ -53,7 +56,7 @@ class App extends Component {
       <div className="App">
         {this.redirectResults()}
         <NavBar />
-        { location !== "/events" ?
+        { (location !== "/events" && location !== "/login") ?
           <Search handleSearch={ this.handleSearch }/>
           :
           null

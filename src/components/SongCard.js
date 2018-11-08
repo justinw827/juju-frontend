@@ -20,13 +20,27 @@ class SongCard extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({url})
+      body: JSON.stringify({
+        spotify_id: this.props.spotifyId,
+        url
+      })
     }
 
+    // Request backend to add selected song to the playlist of the active Party
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/events/${this.props.partyId}`, fetchParams)
-      .then(r => r.json())
+      .then(r => {
+        // Check if 401 Unauthorized error was raised in backend
+        if (r.status === 401) {
+          alert("There was a problem adding your song.")
+        } else {
+          return r.json()
+        }
+      })
       .then(playlist => {
-        console.log(playlist);
+        // Check if 401 Unauthorized error was raised in backend
+        if (playlist) {
+          alert("Song added to playlist!")
+        }
       })
   }
 
@@ -42,6 +56,7 @@ class SongCard extends Component {
 
 function mapStateToProps(state) {
   return {
+    spotifyId: state.spotifyId,
     partyId: state.partyId
   }
 }

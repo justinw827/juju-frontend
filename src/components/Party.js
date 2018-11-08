@@ -53,6 +53,8 @@ class Party extends Component {
       })
     }
 
+    // MAKE CURRENT USER FOLLOW HOST USER
+
     // Add current user to the party
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/add-user`, fetchParams)
       .then(r => r.json())

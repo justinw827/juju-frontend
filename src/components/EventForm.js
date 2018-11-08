@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Card } from 'semantic-ui-react'
 
 import Adapter from '../adapters/Adapter'
 import { setParty } from '../store/actions/user'
@@ -31,11 +31,19 @@ class EventForm extends Component {
 
     // Check user is signed in
     if (this.props.spotifyId !== "") {
+      // Send request to backend to craete new playlist on Spotify
       Adapter.createEvent(fetchBody)
         .then(partyData => {
-          const partyId = partyData["event"]["id"]
+          // Get ID of newley created Party
+          const partyId = partyData["party"]["id"]
+
+          // Alert component a new Party was created and set the new ID for redirect
           this.setState({ submitted: true, partyId: partyId})
+
+          // Set the active Party to the new Party
           this.props.setParty(partyId)
+
+          alert("Make sure to set your playlist to collaborative so your friends can add songs!")
         })
     } else {
       alert("Must be logged in to create an event")
@@ -58,7 +66,7 @@ class EventForm extends Component {
 
   render() {
     return (
-      <div id='event-div'>
+      <Card style={{padding: "1em", display: "inline-block"}}>
         {this.eventRedirect()}
         <h1>New Event</h1>
         <Form id="event-form" onSubmit={(event) => this.handleCreateEvent(event, this.state)}>
@@ -82,7 +90,7 @@ class EventForm extends Component {
           </Form.Field>
           <Button type="submit" value="Submit" color='green'>Make Event</Button>
         </Form>
-      </div>
+      </Card>
     )
   }
 }
