@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Login from './Login'
-import { setUser } from '../store/actions/user'
+import { setUser, fetchCurrentUser } from '../store/actions/user'
 
 class Home extends Component {
 
@@ -20,6 +20,8 @@ class Home extends Component {
 
         // *** Change key name in production
         localStorage.setItem('spotifyId', spotifyId)
+      } else if (localStorage.getItem("spotifyId")) {
+        this.props.fetchCurrentUser()
       }
     }
 
@@ -41,4 +43,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setUser })(Home);
+export default connect(mapStateToProps, { setUser, fetchCurrentUser })(Home);

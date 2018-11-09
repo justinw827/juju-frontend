@@ -15,7 +15,6 @@ const withAuth = (WrappedComponent) => {
     render() {
       if (localStorage.getItem('spotifyId') && this.props.spotifyId !== "") {
         //i have a token and i'm logged in according to redux
-        // wrapped component in our case is Profile
         return <WrappedComponent />
       } else if (localStorage.getItem('spotifyId') && this.props.authenticatingUser) {
         //we're currently fetching, show a loading spinner
@@ -29,6 +28,7 @@ const withAuth = (WrappedComponent) => {
 
   const mapStateToProps = (reduxStoreState) => {
     return {
+      spotifyId: reduxStoreState.spotifyId,
       loggedIn: reduxStoreState.spotifyId,
       authenticatingUser: reduxStoreState.authenticatingUser
     }

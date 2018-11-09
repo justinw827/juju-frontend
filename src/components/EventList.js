@@ -18,6 +18,7 @@ class EventList extends Component {
     // Fetch all parties frmo backend
     Adapter.getAllEvents()
     .then(parties => {
+      debugger
       this.setState({
         parties
       })
