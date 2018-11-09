@@ -100,4 +100,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withAuth(withRouter(connect(mapStateToProps, { setParty })(EventForm)))
+export default withRouter(connect(mapStateToProps, { setParty })(EventForm))

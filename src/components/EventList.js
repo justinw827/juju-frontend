@@ -86,4 +86,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withAuth(connect(mapStateToProps)(EventList))
+export default connect(mapStateToProps)(EventList)
