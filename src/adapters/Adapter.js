@@ -19,6 +19,19 @@ class Adapter {
     return fetch(EVENTS_URL, fetchParams).then(r => r.json())
   }
 
+  static fetchPost(endpoint, fetchBody) {
+    const fetchParams = {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(fetchBody)
+    }
+
+    return fetch(endpoint, fetchParams).then(r => r.json())
+  }
+
 }
 
 export default Adapter

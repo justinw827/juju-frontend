@@ -11,9 +11,11 @@ class Party extends Component {
   }
 
   componentDidMount() {
+    // Get the ID of the party the user is viewing
     const urls = window.location.href.split('/')
     const partyId = urls[urls.length-1]
 
+    // Get party's info from backend
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/events/${partyId}`)
       .then(r => r.json())
       .then(partyData => {
@@ -23,17 +25,22 @@ class Party extends Component {
       })
   }
 
+  // Check if the current user already belongs to the party
   checkUser = () => {
     const currentUser = this.props.spotifyId
+
+    // Array of party's users
     const users = this.state.partyInfo.users
     let found = false
 
+    // Check if users array is undefined
     if (users) {
       found = users.find((user) => {
         return user.spotify_id === currentUser
       })
     }
 
+    // Set return variable to false if it's undefined
     found = !found ? false : found
 
     return found
@@ -41,31 +48,34 @@ class Party extends Component {
 
   handlePartyClick = () => {
     const partyId = this.state.partyInfo.id
-    const fetchParams = {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        spotify_id: this.props.spotifyId,
-        party_id: partyId
-      })
+
+    fetchBody = {
+      spotify_id: this.props.spotifyId,
+      party_id: partyId
     }
 
-    // MAKE CURRENT USER FOLLOW HOST USER
+    endpoint = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/add-user`
 
     // Add current user to the party
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/add-user`, fetchParams)
-      .then(r => r.json())
+    Adapter.fetchPost(endpoint, fetchBody)
       .then(partyData => {
         this.props.setParty(partyId)
         this.setState({
           partyInfo: partyData["party"]
         })
       })
+    //
+    // fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/add-user`, fetchParams)
+    //   .then(r => r.json())
+    //   .then(partyData => {
+    //     this.props.setParty(partyId)
+    //     this.setState({
+    //       partyInfo: partyData["party"]
+    //     })
+    //   })
   }
 
+  // Set the active party in Redux to the clicked party
   handleActiveClick = (setParty, partyId) => {
     setParty(partyId)
   }
