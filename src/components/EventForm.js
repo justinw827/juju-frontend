@@ -42,8 +42,6 @@ class EventForm extends Component {
 
           // Set the active Party to the new Party
           this.props.setParty(partyId)
-
-          alert("Make sure to set your playlist to collaborative so your friends can add songs!")
         })
     } else {
       alert("Must be logged in to create an event")
