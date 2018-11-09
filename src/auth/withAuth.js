@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 // import * as actions from '../actions'
-import { fetchCurrentUser } from '../actions/user'
+import { fetchCurrentUser } from '../store/actions/user'
 import { Loader } from 'semantic-ui-react'
 
 const withAuth = (WrappedComponent) => {
@@ -22,15 +22,15 @@ const withAuth = (WrappedComponent) => {
         return <Loader active inline="centered" />
       } else {
         //user is not AUTHORIZED to see this component
-        return <Redirect to="/login" />
+        return <Redirect to="/" />
       }
     }
   }
 
   const mapStateToProps = (reduxStoreState) => {
     return {
-      loggedIn: reduxStoreState.usersReducer.spotifyId,
-      authenticatingUser: reduxStoreState.usersReducer.authenticatingUser
+      loggedIn: reduxStoreState.spotifyId,
+      authenticatingUser: reduxStoreState.authenticatingUser
     }
   }
 
@@ -39,7 +39,7 @@ const withAuth = (WrappedComponent) => {
       fetchCurrentUser: () => dispatch(fetchCurrentUser()), //dispatch is automagically provided by redux
     }
   }
-  
+
   return connect(mapStateToProps, { fetchCurrentUser })(AuthorizedComponent)
 }
 

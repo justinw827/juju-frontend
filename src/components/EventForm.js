@@ -5,6 +5,7 @@ import { Form, Button, Card } from 'semantic-ui-react'
 
 import Adapter from '../adapters/Adapter'
 import { setParty } from '../store/actions/user'
+import withAuth from '../auth/withAuth'
 
 class EventForm extends Component {
   state = {
@@ -99,4 +100,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setParty })(EventForm))
+export default withAuth(withRouter(connect(mapStateToProps, { setParty })(EventForm)))

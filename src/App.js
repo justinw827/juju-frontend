@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Login from './components/Login';
+import Home from './components/Home';
 import EventList from './components/EventList';
 import EventForm from './components/EventForm';
 import Party from './components/Party';
@@ -56,14 +56,14 @@ class App extends Component {
       <div className="App">
         {this.redirectResults()}
         <NavBar />
-        { (location !== "/events" && location !== "/login") ?
+        { (location !== "/events" && location !== "/home") ?
           <Search handleSearch={ this.handleSearch }/>
           :
           null
         }
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/login" />} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route path="/home" component={Home} />
           <Route path="/events" component={EventList} />
           <Route exact path="/event-form" component={EventForm}/>
           <Route exact path="/party/:id" component={Party}/>

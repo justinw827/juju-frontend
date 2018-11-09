@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
-import { setUser } from '../store/actions/user'
 import Adapter from '../adapters/Adapter'
 import PartyCard from './PartyCard'
 import PartySearch from './PartySearch';
+import withAuth from '../auth/withAuth'
 
 class EventList extends Component {
   state = {
@@ -68,14 +68,6 @@ class EventList extends Component {
   }
 
   render() {
-    // ***** Change to more secure method later *****
-    // If it's the initial login, set the spotify_id in state to the one given in url params
-    if (this.props.spotifyId === "") {
-      const spotifyId = window.location.href.split("s=")[1]
-      this.props.setUser(spotifyId)
-      localStorage.setItem('spotifyId', spotifyId)
-    }
-
     return (
       <Fragment>
         <PartySearch handlePartySearch={ this.handlePartySearch }/>
@@ -94,4 +86,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { setUser })(EventList)
+export default withAuth(connect(mapStateToProps)(EventList))

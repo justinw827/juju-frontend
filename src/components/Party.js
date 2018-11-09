@@ -2,8 +2,10 @@ import React, { Fragment, Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
+import Adapter from '../adapters/Adapter'
 import UserList from './UserList'
 import { setParty } from '../store/actions/user'
+import withAuth from '../auth/withAuth'
 
 class Party extends Component {
   state = {
@@ -40,21 +42,18 @@ class Party extends Component {
       })
     }
 
-    // Set return variable to false if it's undefined
-    found = !found ? false : found
-
     return found
   }
 
   handlePartyClick = () => {
     const partyId = this.state.partyInfo.id
 
-    fetchBody = {
+    const fetchBody = {
       spotify_id: this.props.spotifyId,
       party_id: partyId
     }
 
-    endpoint = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/add-user`
+    const endpoint = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/add-user`
 
     // Add current user to the party
     Adapter.fetchPost(endpoint, fetchBody)
@@ -104,4 +103,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { setParty })(Party)
+export default withAuth(connect(mapStateToProps, { setParty })(Party))
