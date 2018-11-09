@@ -8,7 +8,9 @@ import { Loader } from 'semantic-ui-react'
 const withAuth = (WrappedComponent) => {
   class AuthorizedComponent extends Component {
     componentDidMount() {
-      if (localStorage.getItem('spotifyId') && this.props.spotifyId === "") this.props.fetchCurrentUser()
+      if (localStorage.getItem('spotifyId') && this.props.spotifyId === "") {this.props.fetchCurrentUser()}
+
+
       // if i have a token but don't know who it belongs to, ask the server for that user's data
     }
 

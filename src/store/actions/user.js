@@ -15,6 +15,7 @@ export const setParty = (partyId) => {
 }
 
 export const fetchCurrentUser = () => {
+  console.log(`Bearer ${localStorage.getItem('spotifyId')}`);
   // takes the token in localStorage and finds out who it belongs to
   return (dispatch) => {
     // dispatch(authenticatingUser()) //tells the app we are fetching
@@ -26,6 +27,7 @@ export const fetchCurrentUser = () => {
     })
       .then(response => response.json())
       .then((JSONResponse) => {
+        console.log(JSONResponse)
         if (JSONResponse.message !== "Please log in") {
           dispatch(setUser(JSONResponse.spotifyId))
         }
