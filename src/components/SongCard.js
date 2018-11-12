@@ -50,15 +50,17 @@ class SongCard extends Component {
   render() {
     return (
       <Fragment>
-        <Card fluid color='green'>Name: {this.props.songInfo.name} Artist: {this.props.songInfo.artists[0].name}</Card>
-        <Button onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button>
-        <MButton variant="fab" color="primary" aria-label="Add" onClick={() => this.handleClick(this.state.url)}>
-          <AddIcon />
-        </MButton>
+        <Card fluid color='primary'>
+          <h4>Name: {this.props.songInfo.name} || Artist: {this.props.songInfo.artists[0].name}</h4>
+          <Button className="ui inverted primary button" onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button>
+        </Card>
       </Fragment>
     )
   }
 }
+// <MButton variant="fab" color="primary" aria-label="Add" onClick={() => this.handleClick(this.state.url)}>
+// <AddIcon />
+// </MButton>
 
 function mapStateToProps(state) {
   return {

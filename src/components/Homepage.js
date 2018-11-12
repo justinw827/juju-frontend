@@ -18,6 +18,7 @@ class Homepage extends Component {
     search: false
   }
 
+  // Event handler for song search bar
   handleSearch = (event, searchTerm) => {
     event.preventDefault()
     if (searchTerm !== "") {

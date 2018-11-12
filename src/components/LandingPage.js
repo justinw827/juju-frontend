@@ -22,7 +22,7 @@ class LandingPage extends Component {
   render() {
     return (
       <Fragment>
-        <h1>Welcome to Juju</h1>
+        <h1>Welcome to the Greatest App Ever</h1>
         <Button onClick={this.handleClick} color="green">Find a party</Button>
         {this.eventsRedirect()}
       </Fragment>
