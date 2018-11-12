@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Table } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-
-import MButton from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 
 class SongCard extends Component {
   state = {
@@ -49,12 +46,11 @@ class SongCard extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Card fluid color='primary'>
-          <h4>Name: {this.props.songInfo.name} || Artist: {this.props.songInfo.artists[0].name}</h4>
-          <Button className="ui inverted primary button" onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button>
-        </Card>
-      </Fragment>
+      <Table.Row>
+        <Table.Cell>{this.props.songInfo.name}</Table.Cell>
+        <Table.Cell>{this.props.songInfo.artists[0].name}</Table.Cell>
+        <Table.Cell textAlign='right'><Button className="ui inverted primary button" onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button></Table.Cell>
+      </Table.Row>
     )
   }
 }

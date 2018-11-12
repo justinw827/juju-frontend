@@ -1,7 +1,8 @@
 // CHANGE SPOTIFY ID
 const defaultState = {
   spotifyId: "",
-  partyId: 1
+  partyId: 1,
+  songs: []
 }
 
 export default (state=defaultState, action) => {
@@ -9,7 +10,9 @@ export default (state=defaultState, action) => {
     case 'SET_USER':
       return { ...state, spotifyId: action.spotifyId }
     case 'SET_PARTY':
-      return { ...state,  partyId: action.partyId}
+      return { ...state, partyId: action.partyId}
+    case 'SET_SONGS':
+      return { ...state, songs: action.songs}
     default:
       return state
   }

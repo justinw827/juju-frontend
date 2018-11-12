@@ -14,6 +14,13 @@ export const setParty = (partyId) => {
   }
 }
 
+export const setSongs = (songs) => {
+  return {
+    type: 'SET_SONGS',
+    songs
+  }
+}
+
 export const fetchCurrentUser = () => {
   // takes the token in localStorage and finds out who it belongs to
   return (dispatch) => {

@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, withRouter, Redirect, BrowserRouter as Router } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setUser, fetchCurrentUser } from './store/actions/user'
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Homepage from './components/Homepage';
-import EventList from './components/EventList';
-import EventForm from './components/EventForm';
-import Party from './components/Party';
-import SongList from './components/SongList';
 import NavBar from './components/NavBar';
 import LoginPage from './components/LoginPage'
 
 class App extends Component {
-
-
-
 
   componentDidMount() {
     // ***** Change to more secure method later *****
@@ -38,10 +30,8 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
-        <CssBaseline />
         <NavBar />
 
         {this.props.spotifyId === "" ?

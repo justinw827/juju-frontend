@@ -1,15 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { setUser, fetchCurrentUser } from '../store/actions/user'
-import Login from './Login'
 import EventList from './EventList'
 import EventForm from './EventForm'
 import Party from './Party'
 import SongList from './SongList'
 import LandingPage from './LandingPage'
-import Search from './Search';
 
 class Homepage extends Component {
 
@@ -21,7 +19,7 @@ class Homepage extends Component {
   // Event handler for song search bar
   handleSearch = (event, searchTerm) => {
     event.preventDefault()
-    console.log('handleSearch', event, searchTerm, this, this.state, this.props);
+    // Don't search if input is empty
     if (searchTerm !== "") {
       const fetchParams = {
         method: "POST",
@@ -48,16 +46,7 @@ class Homepage extends Component {
     }
   }
 
-
-  redirectResults = () => {
-    // if (this.state.search) {
-    //   return <Redirect to='/results'/>
-    // }
-  }
-
   render() {
-    const location = this.props.location.pathname
-
     return (
       <Fragment>
         <Switch>
@@ -65,21 +54,17 @@ class Homepage extends Component {
           <Route path="/events" component={EventList} />
           <Route exact path="/event-form" component={EventForm}/>
           <Route exact path="/party/:id" component={Party}/>
-          <Route exact path="/results" component={() => <SongList songs={this.state.songs}/>}/>
+          <Route exact path="/results" component={() => <SongList songs={this.props.songs}/>}/>
         </Switch>
       </Fragment>
     );
   }
 }
 
-// { (location !== "/events") ?
-// <Search handleSearch={this.handleSearch}/>
-// :
-// null
-// }
 const mapStateToProps = (state) => {
   return {
-    spotifyId: state.spotifyId
+    spotifyId: state.spotifyId,
+    songs: state.songs
   }
 }
 

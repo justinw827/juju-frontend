@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Input, Form } from 'semantic-ui-react'
 
 class PartySearch extends Component {
