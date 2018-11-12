@@ -64,6 +64,7 @@ class EventForm extends Component {
   }
 
   render() {
+    console.log('in event form');
     return (
       <Card style={{padding: "1em", display: "inline-block"}}>
         {this.eventRedirect()}

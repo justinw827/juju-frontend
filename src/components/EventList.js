@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 import Adapter from '../adapters/Adapter'
@@ -71,9 +71,9 @@ class EventList extends Component {
     return (
       <Fragment>
         <PartySearch handlePartySearch={ this.handlePartySearch }/>
-        <h1>All Events</h1>
+        <h1>All Parties</h1>
         {this.eventRedirect()}
-        <Button onClick={this.handleClick}>Start an Event</Button>
+        <Button onClick={this.handleClick}>Start a Party!</Button>
         {this.renderEvents()}
       </Fragment>
     )
@@ -86,4 +86,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(EventList)
+export default withRouter(connect(mapStateToProps)(EventList))

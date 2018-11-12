@@ -1,56 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect, BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setUser, fetchCurrentUser } from './store/actions/user'
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Home from './components/Home';
+import Homepage from './components/Homepage';
 import EventList from './components/EventList';
 import EventForm from './components/EventForm';
 import Party from './components/Party';
-import Search from './components/Search';
 import SongList from './components/SongList';
 import NavBar from './components/NavBar';
 import LoginPage from './components/LoginPage'
 
 class App extends Component {
 
-  state = {
-    songs: [],
-    search: false
-  }
 
-  handleSearch = (event, searchTerm) => {
-    event.preventDefault()
-    if (searchTerm !== "") {
-      const fetchParams = {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          search_term: searchTerm,
-          spotify_id: this.props.spotifyId
-        })
-      }
 
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/search`, fetchParams)
-        .then(r => r.json())
-        .then(songs => {
-          this.setState({
-            songs: songs.tracks.items,
-            search: true
-          })
-        })
-      }
-  }
-
-  redirectResults = () => {
-    if (this.state.search) {
-      return <Redirect to='/results'/>
-    }
-  }
 
   componentDidMount() {
     // ***** Change to more secure method later *****
@@ -72,27 +38,23 @@ class App extends Component {
   }
 
   render() {
-    const location = this.props.location.pathname
+
     return (
       <div className="App">
+        <CssBaseline />
         <NavBar />
-        {this.redirectResults()}
+
         {this.props.spotifyId === "" ?
           <LoginPage />
           :
-          <Home />
+          <Homepage />
         }
       </div>
     )
   }
 }
 
-//
-// { (location !== "/events" && location !== "/home") ?
-// <Search handleSearch={ this.handleSearch }/>
-// :
-// null
-// }
+
 const mapStateToProps = (state) => {
   return {
     spotifyId: state.spotifyId

@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { Card, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 
+import MButton from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+
 class SongCard extends Component {
   state = {
     url: ""
@@ -49,6 +52,9 @@ class SongCard extends Component {
       <Fragment>
         <Card fluid color='green'>Name: {this.props.songInfo.name} Artist: {this.props.songInfo.artists[0].name}</Card>
         <Button onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button>
+        <MButton variant="fab" color="primary" aria-label="Add" onClick={() => this.handleClick(this.state.url)}>
+          <AddIcon />
+        </MButton>
       </Fragment>
     )
   }

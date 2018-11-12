@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Input, Form } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom';
 
 class Search extends Component {
   state = {
@@ -29,4 +30,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default withRouter(Search);
