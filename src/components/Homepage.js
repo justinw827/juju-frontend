@@ -21,6 +21,7 @@ class Homepage extends Component {
   // Event handler for song search bar
   handleSearch = (event, searchTerm) => {
     event.preventDefault()
+    console.log('handleSearch', event, searchTerm, this, this.state, this.props);
     if (searchTerm !== "") {
       const fetchParams = {
         method: "POST",
@@ -40,6 +41,8 @@ class Homepage extends Component {
           this.setState({
             songs: songs.tracks.items,
             search: true
+          }, () => {
+            this.props.history.push('/results')
           })
         })
     }
@@ -47,9 +50,9 @@ class Homepage extends Component {
 
 
   redirectResults = () => {
-    if (this.state.search) {
-      return <Redirect to='/results'/>
-    }
+    // if (this.state.search) {
+    //   return <Redirect to='/results'/>
+    // }
   }
 
   render() {
@@ -57,12 +60,6 @@ class Homepage extends Component {
 
     return (
       <Fragment>
-        { (location !== "/events") ?
-          <Search handleSearch={ this.handleSearch.bind(this) }/>
-          :
-          null
-        }
-        {this.redirectResults()}
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/events" component={EventList} />
@@ -75,6 +72,11 @@ class Homepage extends Component {
   }
 }
 
+// { (location !== "/events") ?
+// <Search handleSearch={this.handleSearch}/>
+// :
+// null
+// }
 const mapStateToProps = (state) => {
   return {
     spotifyId: state.spotifyId

@@ -18,10 +18,11 @@ class Search extends Component {
     return (
       <Form id="login-form" onSubmit={(event) => this.props.handleSearch(event, this.state.input)}>
         <label>
-          <Input style={{width: '45%', fontSize: '20pt'}}
+          <Input
+            className="mini"
             value={this.state.input}
             onChange={this.handleChange}
-            size='large' icon='search'
+            icon='search'
             placeholder='Find a Song...'
           />
         </label>
