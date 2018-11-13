@@ -11,7 +11,8 @@ import { Card, Image } from 'semantic-ui-react'
 
 class Party extends Component {
   state = {
-    partyInfo: {}
+    partyInfo: {},
+    imgUrl: ""
   }
 
   componentDidMount() {
@@ -19,12 +20,28 @@ class Party extends Component {
     const urls = window.location.href.split('/')
     const partyId = urls[urls.length-1]
 
+    //method post
+    const fetchBody = {
+      party_id: partyId,
+      spotify_id: this.props.spotifyId
+    }
+
+    const fetchParams = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(fetchBody)
+    }
+
     // Get party's info from backend
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/events/${partyId}`)
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/party`, fetchParams)
       .then(r => r.json())
       .then(partyData => {
+        const imgUrl = partyData["imgUrl"] !== "n/a" ? partyData["imgUrl"] : "https://image.freepik.com/free-icon/black-music-icon_318-9277.jpg"
         this.setState({
-          partyInfo: partyData["party"]
+          partyInfo: partyData["party"],
+          imgUrl
         })
       })
   }
@@ -83,11 +100,11 @@ class Party extends Component {
 
   render() {
     const setParty = this.props.setParty
-    const partyId = this.state.partyInfo.id
+    const partyId = !(JSON.stringify(this.state.partyInfo)) ? this.state.partyInfo.id : -1
     return (
       <Fragment>
         <Card style={{display: "inline-block"}}>
-          <Image src="http://pacesettingtimesonline.com/wp-content/uploads/2017/06/musicnote.jpg"/>
+          <Image src={this.state.imgUrl}/>
         </Card>
         <h1>{this.state.partyInfo.name}</h1>
         <h3>{this.state.partyInfo.description}</h3>
