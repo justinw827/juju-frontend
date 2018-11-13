@@ -28,7 +28,7 @@ class PartyCard extends Component {
     return (
       <Fragment>
         {this.handleRedirect()}
-        <Card color='instagram' onClick={() => this.handleClick(this.props.partyInfo.id)}>
+        <Card style={{display: "inline-block"}} color='instagram' onClick={() => this.handleClick(this.props.partyInfo.id)}>
           <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
           <h3>{this.props.partyInfo.name}</h3>
         </Card>

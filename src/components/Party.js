@@ -7,6 +7,8 @@ import UserList from './UserList'
 import { setParty } from '../store/actions/user'
 import withAuth from '../auth/withAuth'
 
+import { Card, Image } from 'semantic-ui-react'
+
 class Party extends Component {
   state = {
     partyInfo: {}
@@ -84,6 +86,9 @@ class Party extends Component {
     const partyId = this.state.partyInfo.id
     return (
       <Fragment>
+        <Card style={{display: "inline-block"}}>
+          <Image src="http://pacesettingtimesonline.com/wp-content/uploads/2017/06/musicnote.jpg"/>
+        </Card>
         <h1>{this.state.partyInfo.name}</h1>
         <h3>{this.state.partyInfo.description}</h3>
         {this.checkUser() ?
