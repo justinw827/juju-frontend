@@ -1,16 +1,24 @@
-import React, { Component } from 'react';
-import { Card, Table, Label } from 'semantic-ui-react'
+import React, { Component, Fragment } from 'react';
+import { Card, Table, Label, Message } from 'semantic-ui-react'
 
 import SongCard from './SongCard'
 
 class SongList extends Component {
+
+  state = {
+    message: false
+  }
+
+  handleMessage = () => {
+    this.setState({ message: true })
+  }
 
   renderAllSongs = () => {
     if (this.props.songs.length > 0) {
       return this.props.songs.map(song => {
         return (
           <Table.Body>
-            <SongCard key={song.id} songInfo={song}/>
+            <SongCard key={song.id} songInfo={song} handleMessage={this.handleMessage}/>
           </Table.Body>
         )
       })
@@ -21,17 +29,27 @@ class SongList extends Component {
 
   render() {
     return (
-      <Table inverted style={{width: '75%', display: 'inline-block'}}>
-        <Table.Header>
-          <Table.Row columns={5}>
-            <Table.HeaderCell width={2} className="table-column"><h3>Title</h3></Table.HeaderCell>
-            <Table.HeaderCell width={1}><h3>Artist</h3></Table.HeaderCell>
-            <Table.HeaderCell width={1}><h3>Album</h3></Table.HeaderCell>
-            <Table.HeaderCell width={1}></Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        {this.renderAllSongs()}
-      </Table>
+      <Fragment>
+        {this.state.message ?
+          <Message positive style={{width: "25%", display: "inline-block"}}>
+            <Message.Header>Song added to queue!</Message.Header>
+          </Message>
+          :
+          null
+        }
+        <br/>
+        <Table inverted style={{width: '75%', display: 'inline-block'}}>
+          <Table.Header>
+            <Table.Row columns={5}>
+              <Table.HeaderCell width={2} className="table-column"><h3>Title</h3></Table.HeaderCell>
+              <Table.HeaderCell width={1}><h3>Artist</h3></Table.HeaderCell>
+              <Table.HeaderCell width={1}><h3>Album</h3></Table.HeaderCell>
+              <Table.HeaderCell width={1}></Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          {this.renderAllSongs()}
+        </Table>
+      </Fragment>
     )
   }
 

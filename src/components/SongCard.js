@@ -14,6 +14,7 @@ class SongCard extends Component {
   }
 
   handleClick = (url) => {
+    this.props.handleMessage()
     const fetchParams = {
       method: "POST",
       headers: {
@@ -39,7 +40,7 @@ class SongCard extends Component {
       .then(playlist => {
         // Check if 401 Unauthorized error was raised in backend
         if (playlist) {
-          alert("Song added to playlist!")
+          console.log("Song added to playlist!")
         }
       })
   }
@@ -55,9 +56,6 @@ class SongCard extends Component {
     )
   }
 }
-// <MButton variant="fab" color="primary" aria-label="Add" onClick={() => this.handleClick(this.state.url)}>
-// <AddIcon />
-// </MButton>
 
 function mapStateToProps(state) {
   return {

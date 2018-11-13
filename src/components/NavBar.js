@@ -27,7 +27,8 @@ class NavBar extends Component {
     const menuStyles = {
       backgroundColor: "#02143B",
       opacity: '.7',
-      borderRadius: '0'
+      borderRadius: '0',
+      marginBottom: '0'
     }
 
     return (

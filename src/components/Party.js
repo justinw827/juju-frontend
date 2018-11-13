@@ -113,7 +113,7 @@ class Party extends Component {
         {this.checkUser() ?
           <Button color="instagram" onClick={() => this.handleActiveClick(setParty)}>Set Active</Button>
           :
-          <Button color="instagram" onClick={() => this.handlePartyClick()}>Join the Party!</Button>
+          <Button color="instagram" size="large" onClick={() => this.handlePartyClick()}>Join the Party!</Button>
         }
       </Fragment>
     )
