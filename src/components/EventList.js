@@ -71,9 +71,9 @@ class EventList extends Component {
     return (
       <Fragment>
         <PartySearch handlePartySearch={ this.handlePartySearch }/>
-        <h1>All Parties</h1>
+        <h1>All Parties</h1><br/>
         {this.eventRedirect()}
-        <Button color="instagram" onClick={this.handleClick}>Start a Party!</Button><br/>
+        <Button color="instagram" size="large" onClick={this.handleClick}>Start a Party!</Button><br/>
         <Card.Group style={{width: "75%", display: "inline-block", marginTop: "3em"}}>
           {this.renderEvents()}
         </Card.Group>

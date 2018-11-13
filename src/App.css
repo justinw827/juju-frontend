@@ -54,8 +54,8 @@
 }
 
 .nav-link {
-  padding-top: .4em;
-  padding-bottom: .4em
+  padding-top: .6em;
+  padding-bottom: .6em
 }
 
 .login-page {
@@ -98,4 +98,6 @@
 
 #search-bar {
   border-radius: 15em;
+  font-size: 12pt;
+  padding: .25em 0 .25em 1em;
 }

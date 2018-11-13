@@ -48,12 +48,12 @@ class Search extends Component {
       <Form onSubmit={(event) => this.handleSearch(event, this.state.input)}>
         <label>
           <Input
-            className="mini"
             value={this.state.input}
             onChange={this.handleChange}
             icon='search'
             placeholder='Find a Song...'
             id="search-bar"
+            style={{fontSize: '0.825em', padding: '.25em 0 .25em 1em'}}
           />
         </label>
       </Form>

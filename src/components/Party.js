@@ -94,12 +94,14 @@ class Party extends Component {
   }
 
   // Set the active party in Redux to the clicked party
-  handleActiveClick = (setParty, partyId) => {
-    setParty(partyId)
+  handleActiveClick = (setParty) => {
+    setParty(this.state.partyInfo.id)
   }
 
   render() {
     const setParty = this.props.setParty
+
+    // Handle initial render of setting the partyId
     const partyId = !(JSON.stringify(this.state.partyInfo)) ? this.state.partyInfo.id : -1
     return (
       <Fragment>
@@ -109,9 +111,9 @@ class Party extends Component {
         <h1>{this.state.partyInfo.name}</h1>
         <h3>{this.state.partyInfo.description}</h3>
         {this.checkUser() ?
-          <Button onClick={() => this.handleActiveClick(setParty, partyId)}>Set Active</Button>
+          <Button color="instagram" onClick={() => this.handleActiveClick(setParty)}>Set Active</Button>
           :
-          <Button onClick={() => this.handlePartyClick()}>Join the Party!</Button>
+          <Button color="instagram" onClick={() => this.handlePartyClick()}>Join the Party!</Button>
         }
       </Fragment>
     )

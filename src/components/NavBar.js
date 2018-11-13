@@ -37,11 +37,12 @@ class NavBar extends Component {
         </Menu.Item>
         <NavLink exact to="/" className="nav-link">
           <Menu.Item
-            name='Home'
             active={activeItem === 'http://localhost:3001/'}
             onClick={this.handleItemClick}
             style={styles}
-          />
+          >
+          <span>Home</span>
+          </Menu.Item>
         </NavLink>
         <NavLink exact to="/events" className="nav-link">
           <Menu.Item
@@ -49,7 +50,9 @@ class NavBar extends Component {
             active={activeItem === 'http://localhost:3001/events'}
             onClick={this.handleItemClick}
             style={styles}
-          />
+          >
+          <span>Events</span>
+          </Menu.Item>
         </NavLink>
         {this.props.spotifyId !== "" ?
           <Fragment>
@@ -65,10 +68,11 @@ class NavBar extends Component {
             </Menu.Item>
             <NavLink exact to="/" className="nav-link">
               <Menu.Item
-                name="Logout"
-                style={styles}
+                style={{...styles, }}
                 onClick={() => this.handleLogout()}
-              />
+              >
+              <span>Logout</span>
+              </Menu.Item>
             </NavLink>
           </Fragment>
           :
