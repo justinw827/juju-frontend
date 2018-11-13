@@ -21,11 +21,12 @@ class SongList extends Component {
 
   render() {
     return (
-      <Table inverted style={{width: '65%', display: 'inline-block'}}>
+      <Table inverted style={{width: '75%', display: 'inline-block'}}>
         <Table.Header>
-          <Table.Row columns={4}>
+          <Table.Row columns={5}>
             <Table.HeaderCell width={2} className="table-column"><h3>Title</h3></Table.HeaderCell>
             <Table.HeaderCell width={1}><h3>Artist</h3></Table.HeaderCell>
+            <Table.HeaderCell width={1}><h3>Album</h3></Table.HeaderCell>
             <Table.HeaderCell width={1}></Table.HeaderCell>
           </Table.Row>
         </Table.Header>

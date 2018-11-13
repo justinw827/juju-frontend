@@ -49,7 +49,8 @@ class SongCard extends Component {
       <Table.Row>
         <Table.Cell className="table-column"><span>{this.props.songInfo.name}</span></Table.Cell>
         <Table.Cell className="table-column">{this.props.songInfo.artists[0].name}</Table.Cell>
-        <Table.Cell textAlign='center'><Button className="ui inverted primary button" onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button></Table.Cell>
+        <Table.Cell className="table-column">{this.props.songInfo.album.name}</Table.Cell>
+        <Table.Cell textAlign='center'><Button className="ui instagram button" onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button></Table.Cell>
       </Table.Row>
     )
   }
