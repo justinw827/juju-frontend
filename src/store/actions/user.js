@@ -7,6 +7,14 @@ export const setUser = (spotifyId) => {
   }
 }
 
+export const setUserInfo = (name, image) => {
+  return {
+    type: 'SET_USER_INFO',
+    name,
+    image
+  }
+}
+
 export const setParty = (partyId) => {
   return {
     type: 'SET_PARTY',
@@ -34,7 +42,8 @@ export const fetchCurrentUser = () => {
       .then((JSONResponse) => {
         // If response doesn't have an error message set the spotifyId
         if (!JSONResponse.message) {
-          dispatch(setUser(JSONResponse.spotify_id))
+          dispatch(setUser(JSONResponse.user.spotify_id))
+          // Add USER_INFO dispatch with picture and name 
         }
       })
   }

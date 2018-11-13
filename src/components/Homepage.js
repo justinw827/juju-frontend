@@ -51,6 +51,7 @@ class Homepage extends Component {
       <Fragment>
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route path="/s=:s" component={LandingPage} />
           <Route path="/events" component={EventList} />
           <Route exact path="/event-form" component={EventForm}/>
           <Route exact path="/party/:id" component={Party}/>

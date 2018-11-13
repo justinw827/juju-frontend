@@ -45,7 +45,7 @@ class Search extends Component {
 
   render() {
     return (
-      <Form id="login-form" onSubmit={(event) => this.handleSearch(event, this.state.input)}>
+      <Form onSubmit={(event) => this.handleSearch(event, this.state.input)}>
         <label>
           <Input
             className="mini"
@@ -53,6 +53,7 @@ class Search extends Component {
             onChange={this.handleChange}
             icon='search'
             placeholder='Find a Song...'
+            id="search-bar"
           />
         </label>
       </Form>

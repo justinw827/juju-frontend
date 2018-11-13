@@ -73,8 +73,10 @@ class EventList extends Component {
         <PartySearch handlePartySearch={ this.handlePartySearch }/>
         <h1>All Parties</h1>
         {this.eventRedirect()}
-        <Button onClick={this.handleClick}>Start a Party!</Button>
-        {this.renderEvents()}
+        <Button color="instagram" onClick={this.handleClick}>Start a Party!</Button><br/>
+        <div style={{width: "50%", display: "inline-block", marginTop: "3em"}}>
+          {this.renderEvents()}
+        </div>
       </Fragment>
     )
   }

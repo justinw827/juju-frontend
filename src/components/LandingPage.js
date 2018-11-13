@@ -21,11 +21,13 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <Fragment>
-        <h1>Welcome to the Greatest App Ever</h1>
-        <Button onClick={this.handleClick} color="green">Find a party</Button>
+      <div className="landing-page">
+        <span>
+          <h1>Welcome to the Greatest App Ever</h1>
+          <Button onClick={this.handleClick} color="instagram" size="massive">Find a party</Button>
+        </span>
         {this.eventsRedirect()}
-      </Fragment>
+      </div>
     );
   }
 

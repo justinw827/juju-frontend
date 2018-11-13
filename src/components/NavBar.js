@@ -6,10 +6,15 @@ import { connect } from 'react-redux';
 import Search from './Search'
 
 class NavBar extends Component {
-  state = { activeItem: 'events' }
+  state = { activeItem: 'Events' }
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name })
+  }
+
+  handleLogout = () => {
+    window.location.reload()
+    localStorage.clear()
   }
 
   render() {
@@ -21,12 +26,12 @@ class NavBar extends Component {
 
     const menuStyles = {
       backgroundColor: "#02143B",
-      opacity: '.6',
+      opacity: '.7',
       borderRadius: '0'
     }
 
     return (
-      <Menu size="large" style={menuStyles} >
+      <Menu size="large" style={menuStyles}>
         <Menu.Item>
           <i style={{color: "white"}} className="spotify icon"></i>
         </Menu.Item>
@@ -46,22 +51,25 @@ class NavBar extends Component {
             style={styles}
           />
         </NavLink>
-        <Menu.Item position="right">
-          <Search />
-        </Menu.Item>
         {this.props.spotifyId !== "" ?
           <Fragment>
+            <Menu.Item position="right">
+            <Search />
+            </Menu.Item>
             <Menu.Item
               position="right"
               style={styles}
             >
             <Image src="https://react.semantic-ui.com/images/wireframe/square-image.png" avatar />
-            <span> Name</span>
+            <span>Guy Fieri</span>
             </Menu.Item>
-            <Menu.Item
-            name="Logout"
-            style={styles}
-            />`
+            <NavLink exact to="/" className="nav-link">
+              <Menu.Item
+                name="Logout"
+                style={styles}
+                onClick={() => this.handleLogout()}
+              />
+            </NavLink>
           </Fragment>
           :
           null
