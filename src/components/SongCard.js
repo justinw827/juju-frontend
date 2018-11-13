@@ -47,9 +47,9 @@ class SongCard extends Component {
   render() {
     return (
       <Table.Row>
-        <Table.Cell>{this.props.songInfo.name}</Table.Cell>
-        <Table.Cell>{this.props.songInfo.artists[0].name}</Table.Cell>
-        <Table.Cell textAlign='right'><Button className="ui inverted primary button" onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button></Table.Cell>
+        <Table.Cell className="table-column"><span>{this.props.songInfo.name}</span></Table.Cell>
+        <Table.Cell className="table-column">{this.props.songInfo.artists[0].name}</Table.Cell>
+        <Table.Cell textAlign='center'><Button className="ui inverted primary button" onClick={() => this.handleClick(this.state.url)}>Add to Queue</Button></Table.Cell>
       </Table.Row>
     )
   }
