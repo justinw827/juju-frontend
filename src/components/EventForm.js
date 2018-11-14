@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { Form, Button, Card } from 'semantic-ui-react'
+import { Form, Button, Card, Segment } from 'semantic-ui-react'
 
 import Adapter from '../adapters/Adapter'
 import { setParty } from '../store/actions/user'
@@ -64,9 +64,15 @@ class EventForm extends Component {
   }
 
   render() {
-    console.log('in event form');
+    const styles = {
+      padding: "1em",
+      display: "inline-block",
+      width: "30%",
+      height: "30em"
+    }
+
     return (
-      <Card style={{padding: "1em", display: "inline-block"}}>
+      <Segment style={styles}>
         {this.eventRedirect()}
         <h1>New Event</h1>
         <Form id="event-form" onSubmit={(event) => this.handleCreateEvent(event, this.state)}>
@@ -90,7 +96,7 @@ class EventForm extends Component {
           </Form.Field>
           <Button type="submit" value="Submit" color='instagram'>Make Event</Button>
         </Form>
-      </Card>
+      </Segment>
     )
   }
 }
