@@ -38,6 +38,7 @@ class SongList extends Component {
           null
         }
         <br/>
+        <h1>Results</h1>
         <Table inverted style={{width: '75%', display: 'inline-block'}}>
           <Table.Header>
             <Table.Row columns={5}>

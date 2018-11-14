@@ -28,7 +28,8 @@ class NavBar extends Component {
       backgroundColor: "#02143B",
       opacity: '.7',
       borderRadius: '0',
-      marginBottom: '0'
+      marginBottom: '0',
+      height: '3.75em'
     }
 
     return (
