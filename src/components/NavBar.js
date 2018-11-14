@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Menu, Segment, Image } from 'semantic-ui-react'
+import { Menu, Segment, Image, Icon } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -34,7 +34,7 @@ class NavBar extends Component {
     return (
       <Menu size="large" style={menuStyles}>
         <Menu.Item>
-          <i style={{color: "white"}} className="spotify icon"></i>
+          <Icon style={{color: "white"}} size="big" className="spotify icon"></Icon>
         </Menu.Item>
         <NavLink exact to="/" className="nav-link">
           <Menu.Item

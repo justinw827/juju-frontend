@@ -8,6 +8,7 @@ import EventForm from './EventForm'
 import Party from './Party'
 import SongList from './SongList'
 import LandingPage from './LandingPage'
+import ProfilePage from './ProfilePage'
 
 class Homepage extends Component {
 
@@ -56,6 +57,7 @@ class Homepage extends Component {
           <Route exact path="/event-form" component={EventForm}/>
           <Route exact path="/party/:id" component={Party}/>
           <Route exact path="/results" component={() => <SongList songs={this.props.songs}/>}/>
+          <Route exact path="/profile" component={ProfilePage}/>
         </Switch>
       </Fragment>
     );

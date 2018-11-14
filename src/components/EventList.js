@@ -6,7 +6,6 @@ import { Button, Card } from 'semantic-ui-react';
 import Adapter from '../adapters/Adapter'
 import PartyCard from './PartyCard'
 import PartySearch from './PartySearch';
-import withAuth from '../auth/withAuth'
 
 class EventList extends Component {
   state = {
@@ -15,13 +14,32 @@ class EventList extends Component {
   }
 
   componentDidMount() {
-    // Fetch all parties frmo backend
-    Adapter.getAllEvents()
-    .then(parties => {
-      this.setState({
-        parties
+    if (window.location.href === "http://localhost:3001/profile") {
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/profile`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('spotifyId')}`
+        }
       })
-    })
+        .then(response => response.json())
+        .then((userInfo) => {
+          // If response doesn't have an error message set the spotifyId
+          if (!userInfo.message) {
+            console.log(userInfo.user.events);
+            this.setState({
+              parties: userInfo.user.events
+            })
+          }
+        })
+    } else {
+      // Fetch all parties frmo backend
+      Adapter.getAllEvents()
+      .then(parties => {
+        this.setState({
+          parties
+        })
+      })
+    }
   }
 
   handleClick = () => {
@@ -70,10 +88,16 @@ class EventList extends Component {
   render() {
     return (
       <Fragment>
-        <PartySearch handlePartySearch={ this.handlePartySearch }/>
-        <h1>All Parties</h1><br/>
-        {this.eventRedirect()}
-        <Button color="instagram" size="large" onClick={this.handleClick}>Start a Party!</Button><br/>
+        { window.location.href === "http://localhost:3001/profile" ?
+          <Fragment><h1>My Parties</h1><br/></Fragment>
+          :
+          <Fragment>
+            <PartySearch handlePartySearch={ this.handlePartySearch }/>
+            <h1>All Parties</h1><br/>
+            {this.eventRedirect()}
+            <Button color="instagram" size="large" onClick={this.handleClick}>Start a Party!</Button><br/>
+          </Fragment>
+        }
         <Card.Group style={{width: "75%", display: "inline-block", marginTop: "3em"}}>
           {this.renderEvents()}
         </Card.Group>
