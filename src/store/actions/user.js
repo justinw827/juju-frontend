@@ -1,9 +1,10 @@
 import Adapter from '../../adapters/Adapter';
 
-export const setUser = (spotifyId) => {
+export const setUser = (spotifyId, name) => {
   return {
     type: 'SET_USER',
-    spotifyId: spotifyId
+    spotifyId,
+    name
   }
 }
 
@@ -39,11 +40,11 @@ export const fetchCurrentUser = () => {
       }
     })
       .then(response => response.json())
-      .then((JSONResponse) => {
+      .then((userInfo) => {
         // If response doesn't have an error message set the spotifyId
-        if (!JSONResponse.message) {
-          dispatch(setUser(JSONResponse.user.spotify_id))
-          // Add USER_INFO dispatch with picture and name 
+        if (!userInfo.message) {
+          dispatch(setUser(userInfo.user.spotify_id, userInfo.name))
+          // Add USER_INFO dispatch with picture and name
         }
       })
   }

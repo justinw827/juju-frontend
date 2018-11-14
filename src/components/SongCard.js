@@ -14,7 +14,6 @@ class SongCard extends Component {
   }
 
   handleClick = (url) => {
-    this.props.handleMessage()
     const fetchParams = {
       method: "POST",
       headers: {
@@ -30,8 +29,8 @@ class SongCard extends Component {
     // Request backend to add selected song to the playlist of the active Party
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/events/${this.props.partyId}`, fetchParams)
       .then(r => {
-        // Check if 401 Unauthorized error was raised in backend
-        if (r.status === 401) {
+        // If OK status not received from backend
+        if (r.status !== 200 ) {
           alert("There was a problem adding your song.")
         } else {
           return r.json()
@@ -40,7 +39,7 @@ class SongCard extends Component {
       .then(playlist => {
         // Check if 401 Unauthorized error was raised in backend
         if (playlist) {
-          console.log("Song added to playlist!")
+          this.props.handleMessage() // SEND A MESSAGE BACK
         }
       })
   }

@@ -60,13 +60,15 @@ class NavBar extends Component {
             <Menu.Item position="right">
             <Search />
             </Menu.Item>
-            <Menu.Item
-              position="right"
-              style={styles}
-            >
-            <Image src="https://react.semantic-ui.com/images/wireframe/square-image.png" avatar />
-            <span>Guy Fieri</span>
-            </Menu.Item>
+            <NavLink exact to="/profile">
+              <Menu.Item
+                position="right"
+                style={styles}
+              >
+              <Image src="https://react.semantic-ui.com/images/wireframe/square-image.png" avatar />
+              <span>{this.props.name}</span>
+              </Menu.Item>
+            </NavLink>
             <NavLink exact to="/" className="nav-link">
               <Menu.Item
                 style={{...styles, }}
@@ -86,7 +88,8 @@ class NavBar extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    spotifyId: state.spotifyId
+    spotifyId: state.spotifyId,
+    name: state.name
   }
 }
 

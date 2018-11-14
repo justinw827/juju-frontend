@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const Login = (props) => {
   return (
     <Fragment>
-      <Button as="a" href="http://localhost:3000/api/v1/login" size="massive" color="instagram">Login</Button>
+      <Button as="a" href="http://localhost:3000/api/v1/login" size="massive" color="instagram">Log in</Button>
     </Fragment>
   )
 }

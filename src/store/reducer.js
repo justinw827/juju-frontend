@@ -10,7 +10,7 @@ const defaultState = {
 export default (state=defaultState, action) => {
   switch (action.type) {
     case 'SET_USER':
-      return { ...state, spotifyId: action.spotifyId }
+      return { ...state, spotifyId: action.spotifyId, name: action.name }
     case 'SET_USER_INFO':
       return { ...state, name: action.name, image: action.image}
     case 'SET_PARTY':
