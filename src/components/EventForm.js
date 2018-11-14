@@ -88,7 +88,7 @@ class EventForm extends Component {
               onChange={this.handleDescription}
             />
           </Form.Field>
-          <Button type="submit" value="Submit" color='green'>Make Event</Button>
+          <Button type="submit" value="Submit" color='instagram'>Make Event</Button>
         </Form>
       </Card>
     )

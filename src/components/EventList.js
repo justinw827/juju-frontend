@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
-import { Button, Card } from 'semantic-ui-react';
+import { Button, Card, Table } from 'semantic-ui-react';
 
 import Adapter from '../adapters/Adapter'
 import PartyCard from './PartyCard'
@@ -98,9 +98,16 @@ class EventList extends Component {
             <Button color="instagram" size="large" onClick={this.handleClick}>Start a Party!</Button><br/>
           </div>
         }
-        <Card.Group style={{width: "75%", display: "inline-block", marginTop: "3em"}}>
+        <Table inverted style={{width: '75%', display: 'inline-block', marginTop: "3em"}}>
+          <Table.Header>
+            <Table.Row columns={4}>
+              <Table.HeaderCell width={1} className="table-column"><h3>Name</h3></Table.HeaderCell>
+              <Table.HeaderCell width={2}><h3>Description</h3></Table.HeaderCell>
+              <Table.HeaderCell width={1}><h3>Host</h3></Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
           {this.renderEvents()}
-        </Card.Group>
+        </Table>
       </Fragment>
     )
   }

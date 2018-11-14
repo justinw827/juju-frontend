@@ -60,6 +60,7 @@
 
 .login-page {
   height: 100vh;
+  background-size: 100%;
   opacity: .6;
   background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fda6fe0f7735e059acb12100dcaf0162&auto=format&fit=crop&w=1500&q=80');
 }
@@ -70,6 +71,7 @@
 
 .landing-page {
   height: 100vh;
+  background-size: 100%;
   opacity: .6;
   background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5b811266a4cf56733a98b08047ffe3ed&auto=format&fit=crop&w=1500&q=80');
 }
