@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import Login from './Login'
 
 const LoginPage = () => {
   return (
-    <div className="login-page">
-      <span>
+    <Fragment>
+      <div className="login-page">
+      </div>
+      <span id="landing-span">
         <h1>A new way to play music.</h1>
         <Login />
       </span>
-    </div>
+    </Fragment>
   )
 }
 

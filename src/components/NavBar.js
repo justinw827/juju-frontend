@@ -32,6 +32,8 @@ class NavBar extends Component {
       height: '3.75em'
     }
 
+    const name = "Guy Fieri"
+
     return (
       <Menu size="large" style={menuStyles}>
         <Menu.Item>
@@ -67,7 +69,7 @@ class NavBar extends Component {
                 style={styles}
               >
               <Image src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" avatar />
-              <span>{this.props.name}</span>
+              <span style={{marginLeft: ".5em"}}>{ this.props.name ? this.props.name : name}</span>
               </Menu.Item>
             </NavLink>
             <NavLink exact to="/" className="nav-link">
