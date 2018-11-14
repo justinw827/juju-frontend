@@ -8,7 +8,7 @@ class ProfilePage extends Component {
   render() {
     return (
       <div>
-        <h1>{this.props.name}</h1>
+        <h1 style={{marginTop: "2em"}}>{this.props.name}</h1>
         <EventList />
       </div>
     );

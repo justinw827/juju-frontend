@@ -52,7 +52,7 @@ class NavBar extends Component {
             onClick={this.handleItemClick}
             style={styles}
           >
-          <span>Events</span>
+          <span>Parties</span>
           </Menu.Item>
         </NavLink>
         {this.props.spotifyId !== "" ?
@@ -65,7 +65,7 @@ class NavBar extends Component {
                 position="right"
                 style={styles}
               >
-              <Image src="https://react.semantic-ui.com/images/wireframe/square-image.png" avatar />
+              <Image src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" avatar />
               <span>{this.props.name}</span>
               </Menu.Item>
             </NavLink>
@@ -89,7 +89,8 @@ class NavBar extends Component {
 const mapStateToProps = (state) => {
   return {
     spotifyId: state.spotifyId,
-    name: state.name
+    name: state.name,
+    image: state.image
   }
 }
 

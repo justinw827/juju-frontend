@@ -91,12 +91,12 @@ class EventList extends Component {
         { window.location.href === "http://localhost:3001/profile" ?
           <Fragment><h1>My Parties</h1><br/></Fragment>
           :
-          <Fragment>
+          <div style={{marginTop: "2em"}}>
             <PartySearch handlePartySearch={ this.handlePartySearch }/>
             <h1>All Parties</h1><br/>
             {this.eventRedirect()}
             <Button color="instagram" size="large" onClick={this.handleClick}>Start a Party!</Button><br/>
-          </Fragment>
+          </div>
         }
         <Card.Group style={{width: "75%", display: "inline-block", marginTop: "3em"}}>
           {this.renderEvents()}
