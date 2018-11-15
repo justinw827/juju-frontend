@@ -17,7 +17,7 @@ class PartySearch extends Component {
     return (
       <Form id="party-search" onSubmit={(event) => this.props.handlePartySearch(event, this.state.input)}>
         <label>
-          <Input style={{width: '45%', fontSize: '20pt'}}
+          <Input style={{width: '45%', fontSize: '20pt', borderStyle: "groove", borderRadius: "10px"}}
             value={this.state.input}
             onChange={this.handleChange}
             size='large' icon='search'

@@ -7,7 +7,7 @@ import UserList from './UserList'
 import { setParty } from '../store/actions/user'
 import withAuth from '../auth/withAuth'
 
-import { Card, Image } from 'semantic-ui-react'
+import { Card, Image, Message } from 'semantic-ui-react'
 
 class Party extends Component {
   state = {
@@ -102,16 +102,26 @@ class Party extends Component {
     const setParty = this.props.setParty
 
     // Handle initial render of setting the partyId
-    const partyId = !(JSON.stringify(this.state.partyInfo)) ? this.state.partyInfo.id : -1
+    const partyId = !!(JSON.stringify(this.state.partyInfo)) ? this.state.partyInfo.id : -1
+    const message = partyId === this.props.partyId ? "You're already here!" : ""
+    const titleMargin = message === "" ? "3em" : "0em"
+
     return (
       <Fragment>
-        <Card style={{display: "inline-block"}}>
-          <Image src={this.state.imgUrl}/>
-        </Card>
-        <h1>{this.state.partyInfo.name}</h1>
-        <h3>{this.state.partyInfo.description}</h3>
+        {message !== "" ?
+          <Message positive style={{width: "25%", display: "inline-block"}}>
+            <Message.Header>{message}</Message.Header>
+          </Message>
+          :
+          null
+        }
+        <h1 style={{marginTop: titleMargin}}>{this.state.partyInfo.name}</h1>
+        <Card style={{display: "inline-block", width: "30em", marginBottom: "2em"}}>
+          <Image src={this.state.imgUrl} style={{width: "75%", display: "inline"}}/>
+          <h3>{this.state.partyInfo.description}</h3>
+        </Card><br/>
         {this.checkUser() ?
-          <Button color="instagram" onClick={() => this.handleActiveClick(setParty)}>Set Active</Button>
+          partyId !== this.props.partyId ? <Button color="instagram" size="large" onClick={() => this.handleActiveClick(setParty)}>Rejoin the party!</Button> : null
           :
           <Button color="instagram" size="large" onClick={() => this.handlePartyClick()}>Join the Party!</Button>
         }
@@ -123,7 +133,8 @@ class Party extends Component {
 
 function mapStateToProps(state) {
   return {
-    spotifyId: state.spotifyId
+    spotifyId: state.spotifyId,
+    partyId: state.partyId
   }
 }
 

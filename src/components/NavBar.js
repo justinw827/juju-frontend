@@ -37,7 +37,9 @@ class NavBar extends Component {
     return (
       <Menu size="large" style={menuStyles}>
         <Menu.Item>
-          <Icon style={{color: "white"}} size="big" className="spotify icon"></Icon>
+          <a target="_blank" href="https://open.spotify.com/collection/playlists">
+            <Icon style={{color: "white"}} size="big" className="spotify icon"></Icon>
+          </a>
         </Menu.Item>
         <NavLink exact to="/" className="nav-link">
           <Menu.Item
