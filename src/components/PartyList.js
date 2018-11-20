@@ -7,58 +7,51 @@ import Adapter from '../adapters/Adapter'
 import PartyCard from './PartyCard'
 import PartySearch from './PartySearch';
 
-class EventList extends Component {
+class PartyList extends Component {
   state = {
-    parties: [],
-    eventButton: false
+    parties: [], // List of all parties from backend
+    filteredParties: [], // List of filtered parties after search
+    partyButton: false // Was the create party button clicked?
   }
 
   componentDidMount() {
+    // If the user is on their profile page fetch the user's parties, else fetch all parties
     if (window.location.href === "http://localhost:3001/profile") {
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/profile`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('spotifyId')}`
-        }
-      })
-        .then(response => response.json())
+      Adapter.getUsersParties()
         .then((userInfo) => {
           // If response doesn't have an error message set the spotifyId
           if (!userInfo.message) {
-            console.log(userInfo.user.events);
-            this.setState({
-              parties: userInfo.user.events
-            })
+            // Set parties list in state to user's party list returned from backend
+            const parties = userInfo.user.events
+            this.setState({ parties, filteredParties: parties})
+          } else { // Some error was raised
+            console.log("Problem fetching user's parties in PartyList");
           }
         })
     } else {
       // Fetch all parties frmo backend
       Adapter.getAllEvents()
       .then(parties => {
-        this.setState({
-          parties
-        })
+        this.setState({ parties, filteredParties: parties }) // Set parties list in state to list of all parties returned from backend
       })
     }
   }
 
-  handleClick = () => {
-    this.setState({
-      eventButton: true
-    })
-  }
+  // Helper method to set value of create party to true
+  handleClick = () => { this.setState({ partyButton: true }) }
 
   eventRedirect = () => {
     // Check if the event form button was clicked
-    if (this.state.eventButton) {
+    if (this.state.partyButton) {
       return <Redirect to='/event-form'/>
     }
   }
 
   // Helper method to render Event components for all parties
   renderEvents = () => {
-    if(this.state.parties.length > 0) {
-      return this.state.parties.map(party => {
+    // If there are parties, return an array of PartyCard components
+    if (this.state.filteredParties.length > 0) {
+      return this.state.filteredParties.map(party => {
         return <PartyCard key={party.id} partyInfo={party}/>
       })
     }
@@ -66,23 +59,9 @@ class EventList extends Component {
   }
 
   handlePartySearch = (event, searchTerm) => {
-    const fetchParams = {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({search_term: searchTerm})
-    }
-
-    // Fetch parties from backend that contain searchTerm as a substring in name
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/search`, fetchParams)
-      .then(r => r.json())
-      .then(parties => {
-        this.setState({
-          parties
-        })
-      })
+    // Filter party list based on what the user searched for
+    const filteredParties = this.state.parties.filter(party => (party.name.toLowerCase()).includes(searchTerm.toLowerCase()))
+    this.setState({ filteredParties })
   }
 
   render() {
@@ -112,4 +91,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(EventList))
+export default withRouter(connect(mapStateToProps)(PartyList))

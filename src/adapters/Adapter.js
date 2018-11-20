@@ -1,8 +1,17 @@
-import { EVENTS_URL } from './links'
+import { PARTIES_URL, PROFILE_URL } from './links'
 
 class Adapter {
   static getAllEvents() {
-    return ( fetch(EVENTS_URL).then(r => r.json()) )
+    return ( fetch(PARTIES_URL).then(r => r.json()) )
+  }
+
+  static getUsersParties() {
+    return ( fetch(PROFILE_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('spotifyId')}`
+      }
+    }).then(r => r.json()) )
   }
 
   static createEvent(fetchBody) {
@@ -16,7 +25,7 @@ class Adapter {
       body: JSON.stringify(fetchBody)
     }
 
-    return fetch(EVENTS_URL, fetchParams).then(r => r.json())
+    return fetch(PARTIES_URL, fetchParams).then(r => r.json())
   }
 
   static fetchPost(endpoint, fetchBody) {

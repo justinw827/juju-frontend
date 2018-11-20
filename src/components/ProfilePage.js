@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import EventList from './EventList';
+import PartyList from './PartyList';
 
 class ProfilePage extends Component {
 
@@ -9,7 +9,7 @@ class ProfilePage extends Component {
     return (
       <div>
         <h1 style={{marginTop: "2em"}}>{this.props.name}</h1>
-        <EventList />
+        <PartyList />
       </div>
     );
   }

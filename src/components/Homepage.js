@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { setUser, fetchCurrentUser } from '../store/actions/user'
-import EventList from './EventList'
+import PartyList from './PartyList'
 import PartyForm from './PartyForm'
 import Party from './Party'
 import SongList from './SongList'
@@ -53,7 +53,7 @@ class Homepage extends Component {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/s=:s" component={LandingPage} />
-          <Route path="/events" component={EventList} />
+          <Route path="/events" component={PartyList} />
           <Route exact path="/event-form" component={PartyForm}/>
           <Route exact path="/party/:id" component={Party}/>
           <Route exact path="/results" component={() => <SongList songs={this.props.songs}/>}/>
