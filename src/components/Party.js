@@ -82,15 +82,6 @@ class Party extends Component {
           partyInfo: partyData["party"]
         })
       })
-    //
-    // fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/party/add-user`, fetchParams)
-    //   .then(r => r.json())
-    //   .then(partyData => {
-    //     this.props.setParty(partyId)
-    //     this.setState({
-    //       partyInfo: partyData["party"]
-    //     })
-    //   })
   }
 
   // Set the active party in Redux to the clicked party
@@ -104,15 +95,18 @@ class Party extends Component {
     // Handle initial render of setting the partyId
     const partyId = !!(JSON.stringify(this.state.partyInfo)) ? this.state.partyInfo.id : -1
 
+    // Is the current active party the party being displayed
+    const isActiveParty = partyId === this.props.partyId
+
     // Set the message displayed on the top of the page
-    const message = partyId === this.props.partyId ? "You're already here!" : ""
+    const message = isActiveParty ? "You're already here!" : ""
 
     // If there's no message set a margin-top
     const titleMargin = message === "" ? "3em" : "0em"
 
     return (
       <Fragment>
-        {message !== "" ?
+        {message !== "" ? /* Check if there's a message to display */
           <Message positive style={{width: "25%", display: "inline-block"}}>
             <Message.Header>{message}</Message.Header>
           </Message>
@@ -124,8 +118,8 @@ class Party extends Component {
           <Image src={this.state.imgUrl} style={{width: "75%", display: "inline"}}/>
           <h3>{this.state.partyInfo.description}</h3>
         </Card><br/>
-        {this.checkUser() ?
-          partyId !== this.props.partyId ? <Button color="instagram" size="large" onClick={() => this.handleActiveClick(setParty)}>Rejoin the party!</Button> : null
+        {this.checkUser() ? /* Check if current user is already in the party */
+          !isActiveParty ? <Button color="instagram" size="large" onClick={() => this.handleActiveClick(setParty)}>Rejoin the party!</Button> : null
           :
           <Button color="instagram" size="large" onClick={() => this.handlePartyClick()}>Join the Party!</Button>
         }
@@ -133,7 +127,6 @@ class Party extends Component {
     )
   }
 }
-// <UserList users={props.eventInfo.users}/>
 
 function mapStateToProps(state) {
   return {

@@ -50,7 +50,7 @@ class NavBar extends Component {
           <span>Parties</span>
           </Menu.Item>
         </NavLink>
-        {this.props.spotifyId !== "" ?
+        {this.props.spotifyId !== "" ? /* Only render if the user is logged in */
           <Fragment>
             <Menu.Item position="right">
             <Search />
