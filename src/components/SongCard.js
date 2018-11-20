@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Card, Button, Table } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Button, Table } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 
 class SongCard extends Component {

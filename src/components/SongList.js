@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Card, Table, Label, Message } from 'semantic-ui-react'
+import { Table, Message } from 'semantic-ui-react'
 
 import SongCard from './SongCard'
 

@@ -33,7 +33,7 @@ class NavBar extends Component {
     return (
       <Menu size="large" style={menuStyles}>
         <Menu.Item>
-          <a target="_blank" href="https://open.spotify.com/collection/playlists">
+          <a target="_blank" rel="noopener noreferrer" href="https://open.spotify.com/collection/playlists">
             <Icon style={{color: "white"}} size="big" className="spotify icon"></Icon>
           </a>
         </Menu.Item>

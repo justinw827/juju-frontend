@@ -1,6 +1,16 @@
 import { PARTIES_URL, PROFILE_URL } from './links'
 
 class Adapter {
+  static getUser() {
+    return (
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/profile`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('spotifyId')}`
+        }
+      }).then(response => response.json()))
+  }
+
   // Class method for querying Spotify API with user's search term. Actual request to Spoitfy API
   // performed by back end to avoid CORS issues.
   static getSongs(fetchBody) {
@@ -24,15 +34,6 @@ class Adapter {
 
   // Class method for creating a party to be stored in the backend
   static createEvent(fetchBody) {
-    const fetchParams = {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(fetchBody)
-    }
-
     return this.fetchPost(PARTIES_URL, fetchBody)
   }
 
