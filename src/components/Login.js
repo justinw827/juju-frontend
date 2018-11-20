@@ -1,22 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { connect } from 'react-redux';
 
-// import { spotifyLogin } from '../store/actions/user'
+// Login button to initiate login through Spotify 
+const Login = () => <Button as="a" href="http://localhost:3000/api/v1/login" size="massive" color="instagram">Log in</Button>
 
-const Login = (props) => {
-  return (
-    <Fragment>
-      <Button as="a" href="http://localhost:3000/api/v1/login" size="massive" color="instagram">Log in</Button>
-    </Fragment>
-  )
-}
-// <Button color="green" onClick={props.spotifyLogin}>Login with Spotify</Button>
-
-function mapStateToProps(state) {
-  return {
-    spotifyId: state.spotifyId
-  }
-}
-
-export default connect(mapStateToProps, null)(Login)
+export default Login

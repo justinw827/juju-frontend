@@ -1,33 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 class LandingPage extends Component {
-
-  state = {
-    clicked: false
-  }
-
-  eventsRedirect = () => {
-    // Check if the event form button was clicked
-    if (this.state.clicked) {
-      return <Redirect to='/events'/>
-    }
-  }
-
-  handleClick = () => {
-    this.setState({ clicked: true })
-  }
+  // Redurect to parties page when 'Find a Party' button is clicked
+  handleClick = () => { this.props.history.push('/events') }
 
   render() {
     return (
       <Fragment>
         <div className="landing-page">
-          {this.eventsRedirect()}
         </div>
         <span id="landing-span">
           <h1>Music for everyone</h1>
-          <Button onClick={this.handleClick} color="instagram" size="massive">Find a party</Button>
+          <Button onClick={this.handleClick} color="instagram" size="massive">Find a Party</Button>
         </span>
       </Fragment>
     );
@@ -35,4 +21,4 @@ class LandingPage extends Component {
 
 }
 
-export default LandingPage;
+export default withRouter(LandingPage);

@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
-import { setUser, fetchCurrentUser } from '../store/actions/user'
 import LandingPage from './LandingPage'
 import PartyForm from './PartyForm'
 import PartyList from './PartyList'
@@ -11,12 +10,6 @@ import Party from './Party'
 import SongList from './SongList'
 
 class Homepage extends Component {
-
-  state = {
-    songs: [],
-    search: false
-  }
-
   render() {
     return (
       <Fragment>
@@ -41,4 +34,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setUser, fetchCurrentUser })(Homepage))
+export default withRouter(connect(mapStateToProps)(Homepage))
