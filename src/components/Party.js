@@ -103,7 +103,11 @@ class Party extends Component {
 
     // Handle initial render of setting the partyId
     const partyId = !!(JSON.stringify(this.state.partyInfo)) ? this.state.partyInfo.id : -1
+
+    // Set the message displayed on the top of the page
     const message = partyId === this.props.partyId ? "You're already here!" : ""
+
+    // If there's no message set a margin-top
     const titleMargin = message === "" ? "3em" : "0em"
 
     return (
@@ -116,7 +120,7 @@ class Party extends Component {
           null
         }
         <h1 style={{marginTop: titleMargin}}>{this.state.partyInfo.name}</h1>
-        <Card style={{display: "inline-block", width: "30em", marginBottom: "2em"}}>
+        <Card style={{display: "inline-block", width: "30em", marginBottom: "2em", boxShadow: "0 0 0 0 rgba(0, 0, 0)"}}>
           <Image src={this.state.imgUrl} style={{width: "75%", display: "inline"}}/>
           <h3>{this.state.partyInfo.description}</h3>
         </Card><br/>

@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { setUser, fetchCurrentUser } from '../store/actions/user'
 import EventList from './EventList'
-import EventForm from './EventForm'
+import PartyForm from './PartyForm'
 import Party from './Party'
 import SongList from './SongList'
 import LandingPage from './LandingPage'
@@ -54,7 +54,7 @@ class Homepage extends Component {
           <Route exact path="/" component={LandingPage} />
           <Route path="/s=:s" component={LandingPage} />
           <Route path="/events" component={EventList} />
-          <Route exact path="/event-form" component={EventForm}/>
+          <Route exact path="/event-form" component={PartyForm}/>
           <Route exact path="/party/:id" component={Party}/>
           <Route exact path="/results" component={() => <SongList songs={this.props.songs}/>}/>
           <Route exact path="/profile" component={ProfilePage}/>

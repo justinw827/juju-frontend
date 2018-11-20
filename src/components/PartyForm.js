@@ -5,29 +5,31 @@ import { Form, Button, Card, Segment } from 'semantic-ui-react'
 
 import Adapter from '../adapters/Adapter'
 import { setParty } from '../store/actions/user'
-import withAuth from '../auth/withAuth'
 
-class EventForm extends Component {
+class PartyForm extends Component {
   state = {
-    name: "",
-    description: "",
-    submitted: false,
-    partyId: 0
+    name: "", // Value of name input field
+    description: "", // Value of description input field
+    submitted: false, // Was the form submission button clicked?
+    partyId: 0 // ID of the newly created party to redirect to, once the party was created in the back end
   }
 
+  // Helper method to redirect user to the page of the new party
   eventRedirect = () => {
-    if(this.state.submitted) {
+    if(this.state.submitted) { // Check if the form was submitted
       return <Redirect to={`/party/${this.state.partyId}`}/>
     }
   }
 
-  handleCreateEvent = (event, state) => {
-    event.preventDefault()
+  // Helper method to create party in back end with user input
+  handleCreateParty = (event, state) => {
+    event.preventDefault() // Prevent the page from redirecting on form submission
 
+    // Body of fetch request
     const fetchBody = {
-      spotify_id: this.props.spotifyId,
-      event_name: state.name,
-      event_description: state.description
+      spotify_id: this.props.spotifyId, // Spotify ID of the signed in user
+      event_name: state.name, // Name of party given by user
+      event_description: state.description // Description of party given by user
     }
 
     // Check user is signed in
@@ -49,14 +51,14 @@ class EventForm extends Component {
     }
   }
 
-  // Helper function to handle name input state
+  // Helper method to handle name input state
   handleName = (event) => {
     this.setState({
       name: event.target.value
     })
   }
 
-  // Helper function to handle description input state
+  // Helper method to handle description input state
   handleDescription = (event) => {
     this.setState({
       description: event.target.value
@@ -64,23 +66,26 @@ class EventForm extends Component {
   }
 
   render() {
+    // Object to hold styles for the form
     const styles = {
+      marginTop: "5em",
       padding: "1em",
       display: "inline-block",
       width: "30%",
-      height: "30em"
+      height: "30em",
+      borderStyle: "groove"
     }
 
     return (
-      <Segment style={styles}>
+      <Card style={styles}>
         {this.eventRedirect()}
-        <h1>New Event</h1>
-        <Form id="event-form" onSubmit={(event) => this.handleCreateEvent(event, this.state)}>
+        <h1>New Party</h1>
+        <Form id="party-form" onSubmit={(event) => this.handleCreateParty(event, this.state)}>
           <Form.Field>
             <Form.Input
              label="Name"
              name="name"
-             placeholder="Event Name"
+             placeholder="Party Name"
              value={this.state.name}
              onChange={this.handleName}
             />
@@ -89,22 +94,24 @@ class EventForm extends Component {
             <Form.TextArea
               label="Description"
               name="description"
-              placeholder="Event Description"
+              placeholder="Party Description"
               value={this.state.description}
               onChange={this.handleDescription}
+              style={{borderStyle: "groove"}}
             />
           </Form.Field>
-          <Button type="submit" value="Submit" color='instagram'>Make Event</Button>
+          <Button type="submit" value="Submit" color='instagram'>Start Party!</Button>
         </Form>
-      </Segment>
+      </Card>
     )
   }
 }
 
+// Get the Spotify ID of the signed in user from Redux store
 function mapStateToProps(state) {
   return {
     spotifyId: state.spotifyId
   }
 }
 
-export default withRouter(connect(mapStateToProps, { setParty })(EventForm))
+export default withRouter(connect(mapStateToProps, { setParty })(PartyForm))
