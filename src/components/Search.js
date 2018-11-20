@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Input, Form } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { setSongs } from '../store/actions/user'
+import Adapter from '../adapters/Adapter'
 
 class Search extends Component {
   state = {
@@ -22,23 +23,16 @@ class Search extends Component {
     event.preventDefault()
     // Don't search if input is empty
     if (searchTerm !== "") {
-      const fetchParams = {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          search_term: searchTerm,
-          spotify_id: this.props.spotifyId
-        })
+      const fetchBody = {
+        search_term: searchTerm,
+        spotify_id: this.props.spotifyId
       }
 
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/search`, fetchParams)
-        .then(r => r.json())
+      // Get matching songs from Spotify API
+      Adapter.getSongs(fetchBody)
         .then(songs => {
-          this.props.setSongs(songs.tracks.items)
-          this.props.history.push('/results')
+          this.props.setSongs(songs.tracks.items) // Set the song list in Redux store
+          this.props.history.push('/results') // Redirect to the results page
         })
     }
   }

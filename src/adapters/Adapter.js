@@ -1,6 +1,10 @@
 import { PARTIES_URL, PROFILE_URL } from './links'
 
 class Adapter {
+  static getSongs(fetchBody) {
+    return this.fetchPost(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/search`, fetchBody)
+  }
+
   static getAllEvents() {
     return ( fetch(PARTIES_URL).then(r => r.json()) )
   }

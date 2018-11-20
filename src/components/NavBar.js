@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Menu, Segment, Image, Icon } from 'semantic-ui-react'
+import { Menu, Image, Icon } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
