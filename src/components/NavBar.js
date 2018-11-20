@@ -6,24 +6,19 @@ import { connect } from 'react-redux';
 import Search from './Search'
 
 class NavBar extends Component {
-  state = { activeItem: 'Events' }
-
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
-  }
-
+  // Clear ID out of local storage and reload the page
   handleLogout = () => {
     window.location.reload()
     localStorage.clear()
   }
 
   render() {
-    const activeItem = window.location.href
-
+    // Style object for Menu item colors
     const styles = {
       color: '#FFF'
     }
 
+    // Style object for entire Menu
     const menuStyles = {
       backgroundColor: "#02143B",
       opacity: '.7',
@@ -32,6 +27,7 @@ class NavBar extends Component {
       height: '3.75em'
     }
 
+    // Default name of user
     const name = "Guy Fieri"
 
     return (
@@ -42,19 +38,13 @@ class NavBar extends Component {
           </a>
         </Menu.Item>
         <NavLink exact to="/" className="nav-link">
-          <Menu.Item
-            active={activeItem === 'http://localhost:3001/'}
-            onClick={this.handleItemClick}
-            style={styles}
-          >
+          <Menu.Item style={styles}>
           <span>Home</span>
           </Menu.Item>
         </NavLink>
         <NavLink exact to="/events" className="nav-link">
           <Menu.Item
             name='Events'
-            active={activeItem === 'http://localhost:3001/events'}
-            onClick={this.handleItemClick}
             style={styles}
           >
           <span>Parties</span>
