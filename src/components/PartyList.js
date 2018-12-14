@@ -16,7 +16,7 @@ class PartyList extends Component {
 
   componentDidMount() {
     // If the user is on their profile page fetch the user's parties, else fetch all parties
-    if (window.location.href === "http://localhost:3001/profile") {
+    if (window.location.href === "https://juju-backend.herokuapp.com/profile") {
       Adapter.getUsersParties()
         .then((userInfo) => {
           // If response doesn't have an error message set the spotifyId
@@ -67,7 +67,7 @@ class PartyList extends Component {
   render() {
     return (
       <Fragment>
-        { window.location.href === "http://localhost:3001/profile" ?
+        { window.location.href === "https://juju-backend.herokuapp.com/profile" ?
           <Fragment><h1>My Parties</h1><br/></Fragment>
           :
           <div style={{marginTop: "2em"}}>
