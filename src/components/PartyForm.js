@@ -37,6 +37,7 @@ class PartyForm extends Component {
       // Send request to backend to craete new playlist on Spotify
       Adapter.createEvent(fetchBody)
         .then(partyData => {
+           debugger
           // Get ID of newley created Party
           const partyId = partyData["party"]["id"]
 
