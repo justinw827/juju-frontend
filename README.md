@@ -8,6 +8,8 @@ In the project directory, you can run:
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
+Front end configured to start on port 3001 by default.
+Back end server should be running in order for front end to work correctly.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
